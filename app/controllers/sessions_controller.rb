@@ -13,6 +13,7 @@ def create
   else
     flash.now[:error] = 'Something wen wrong. Please try again'
     render 'new'
+  end
 end
 
 def destroy
