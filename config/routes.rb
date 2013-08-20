@@ -1,5 +1,6 @@
 Friendbc::Application.routes.draw do
 
+root 'users#index'
 
   get '/sessions/new', controller: 'sessions', action: 'new', as: 'new_session'
   post '/sessions', controller: 'sessions', action: 'create', as: 'session'
