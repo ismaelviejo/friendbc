@@ -26,7 +26,7 @@ end
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_url
+      redirect_to users_url, notice: 'User successfully created'
     else
       render 'new'
     end
@@ -39,7 +39,7 @@ end
   def update
 
     if @user.update.attributes(user_params)
-      redirect_to users_url
+      redirect_to users_url, notice: 'User successfully updated'
     else
       render 'new'
     end
