@@ -16,6 +16,9 @@ def create
 end
 
 def destroy
+  reset_session
+  flash[:notice] = 'Sign out successfully'
+  redirect_to root_url
 end
 
 
