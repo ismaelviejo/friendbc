@@ -1,13 +1,6 @@
 class UsersController < ApplicationController
 before_action :set_user, only: [:show, :edit, :update, :destroy]
-def set_user
-  @user = User.find_by(params[:id])
-end
-def user_params
 
-  params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :facebook_access_token, :facebook_id)
-
-end
 
   def index
     @users = User.all
@@ -28,10 +21,14 @@ end
 
     @user = User.new(user_params)
 
-    if @user.save
-      redirect_to users_url, notice: 'User successfully created'
-    else
-      render 'new'
+    respond_to do |format|
+     if @user.save
+      format.html { redirect_to @user, notice: 'User successfully created'}
+      format.json {render action: 'show', status :created, location: @user}
+     else
+      format.html {render action: 'new'}
+      format.json {render json: @user.erros, status: :unprocessable_entity}
+     end
     end
   end
 
@@ -41,11 +38,16 @@ end
 
   def update
 
-    if @user.update.attributes(user_params)
-      redirect_to users_url, notice: 'User successfully updated'
-    else
-      render 'new'
+    respond_to do |format|
+     if @user.update(user_params)
+      format.html {redirect_to @user, notice: 'User successfully created'}
+      format.json {head :no_content}
+     else
+      format.html {render action: 'edit'}
+      format.json {render json: @user.erros, status: :unprocessable_entity}
+     end
     end
+
   end
 
   def destroy
@@ -53,4 +55,19 @@ end
     @user.destroy
     redirect_to users_url
   end
+
+private
+# Use callbacks to share common setup or constraints between actions.
+def set_user
+  @user = User.find_by(params[:id])
+end
+
+# Never trust parameters from the scary internet, only allow the white list through
+def user_params
+
+  params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :facebook_access_token, :facebook_id)
+
+end
+
+
 end
