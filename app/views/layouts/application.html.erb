@@ -11,6 +11,13 @@
 <%= flash[:notice] %>
 <%= flash[:error] %>
 
+<% if @user.present? %>
+Sign in as <%= User.find_by(id: session[:user_id]).username %>
+<% else %>
+<%= link_to 'Sign in', new_session_url %>
+<% end %>
+
+
 <%= yield %>
 
 </body>
