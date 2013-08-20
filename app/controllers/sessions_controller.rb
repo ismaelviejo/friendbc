@@ -6,7 +6,7 @@ end
 def create
   @user = User.find_by username: params[:username]
 
-  if @user.present? && @user.authentication(params[:password])
+  if @user.present? && @user.authenticate(params[:password])
     session[:user_id] = @user.id
     flash[:notice] = 'Sign in successfully'
     redirect_to root_url
