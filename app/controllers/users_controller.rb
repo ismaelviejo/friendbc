@@ -3,7 +3,11 @@ before_action :set_user, only [:show, :edit, :update, :destroy]
 def set_user
   @user = User.find_by(params[:id])
 end
+def user_params
 
+  params.require(:user).permit(:username, :password, :password_confirmation, :first_name, :last_name, :facebook_access_token, :facebook_id)
+
+end
 
   def index
     @users = User.all
@@ -18,7 +22,7 @@ end
   end
 
   def create
-    user_params = params[:user]
+
     @user = User.new(user_params)
 
     if @user.save
