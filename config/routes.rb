@@ -1,4 +1,10 @@
 Friendbc::Application.routes.draw do
+
+
+  get '/sessions/new', controller: 'sessions', action: 'new', as: 'new_session'
+  post '/sessions', controller: 'sessions', action: 'create', as: 'session'
+  delete '/sessions', controller: 'sessions', action: 'destroy'
+
   # Routes for the User resource:
   # CREATE
   get '/users/new', controller: 'users', action: 'new', as: 'new_user'
@@ -56,7 +62,7 @@ Friendbc::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
