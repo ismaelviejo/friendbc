@@ -1,4 +1,6 @@
 <h1>User #<%= @user.id %></h1>
+<small><%= link_to ' Edit user', edit_user_url(@user), class: 'icon-edit' %></small>
+<small><%= link_to ' Delete', @user, method: 'delete', data: { confirm: 'Do u want delete it'} %></small>
 
 <p>
   <b>Username:</b>
