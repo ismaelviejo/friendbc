@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
 before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+# AUTHORIZATION TO USER CONTROLLER
+
+before_action :current_user_must_be_user, only: [:show, :edit, :update, :destroy]
+def current_user_must_be_user
+  unless current_user == @user
+    redirect_to :back, notice: 'You are not authorized for that.'
+  end
+end
+
 
   def index
     @users = User.all
