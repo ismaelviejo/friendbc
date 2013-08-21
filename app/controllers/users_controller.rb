@@ -23,9 +23,9 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     respond_to do |format|
      if @user.save
-      sessions[:user_id] = @user.id
+      session[:user_id] = @user.id
       format.html { redirect_to @user, notice: 'User successfully created'}
-      format.json {render action: 'show', status :created, location: @user}
+      format.json { render action: 'show', status: :created, location: @user }
      else
       format.html {render action: 'new'}
       format.json {render json: @user.erros, status: :unprocessable_entity}
@@ -41,7 +41,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     respond_to do |format|
      if @user.update(user_params)
-      format.html {redirect_to @user, notice: 'User successfully created'}
+      format.html {redirect_to @user, notice: 'User successfully updated'}
       format.json {head :no_content}
      else
       format.html {render action: 'edit'}
