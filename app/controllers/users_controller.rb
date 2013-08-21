@@ -23,6 +23,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     respond_to do |format|
      if @user.save
+      sessions[:user_id] = @user.id
       format.html { redirect_to @user, notice: 'User successfully created'}
       format.json {render action: 'show', status :created, location: @user}
      else
